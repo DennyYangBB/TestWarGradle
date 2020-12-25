@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'org.akhikhl.gretty'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+war.archiveName = "TestWar.war"
+
+buildscript {
+    repositories {
+        mavenCentral()  
+    }
+
+    dependencies {
+    	classpath 'org.akhikhl.gretty:gretty:1.2.4'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+gretty {
+	jvmArgs = ['-Djava.net.preferIPv4Stack=true']
+	httpsEnabled = true
+	contextPath = '/TestWar'
+}
+
